@@ -1,1 +1,31 @@
+.card_wrapper{
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+}
 
+.card_wrapper :hover{
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.card {
+  margin:auto;
+  width: 40%;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  border: 0.5px solid black;
+}
+
+.img{
+  width: 150px;
+  height: 150px;
+  display: flex;
+}
+
+.user_info{
+  margin: 0 10px 0 10px;
+}
