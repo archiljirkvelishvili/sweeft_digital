@@ -2,12 +2,14 @@
 import React, {useState, useEffect} from "react"
 
 import User from "./components/User"
+import Spinner from "./components/Spinner"
 
 
 export default function App() {
   
   const [dataList, setDataList] = useState([])
   const [pageCount, setPageCount] = useState(1)
+  const [spinner, setSpinner] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -16,6 +18,7 @@ export default function App() {
         const data = await response.json()
         console.log(data.list)
         setDataList(prev => [...prev, ...data.list])
+        setSpinner(false)
       } catch (error) {
         throw error
       }
@@ -26,6 +29,7 @@ export default function App() {
   window.onscroll = () =>{
     if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight){
       setPageCount(prev => prev + 1)
+      setSpinner(true)
     }
   }
 
@@ -33,8 +37,11 @@ export default function App() {
   const comp = dataList && dataList.map(item => <User key={item.id} data={item}/>)
 
   return (
-    <div className="card_wrapper">
-     {comp}
+    <div>
+      <div className="card_wrapper">
+      {comp}
+      </div>
+      {spinner && <Spinner  />}
     </div>
   );
 }
