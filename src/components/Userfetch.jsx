@@ -15,7 +15,6 @@ export default function Usefetch() {
       try {
         const response = await fetch(`http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${pageCount}/16`)
         const data = await response.json()
-        console.log(data.list)
         setDataList(prev => [...prev, ...data.list])
         setSpinner(false)
       } catch (error) {
@@ -27,10 +26,6 @@ export default function Usefetch() {
   window.onscroll = () =>{
     if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight){
       setPageCount(prev => prev + 1)
-      console.log(document.documentElement.offsetHeight)
-      console.log(window.innerHeight + document.documentElement.scrollTop)
-    
-      console.log(pageCount)
       setSpinner(true)
     }
   }
@@ -45,5 +40,6 @@ export default function Usefetch() {
       </div>
       {spinner && <Spinner  />}
     </div>
+
   );
 }
