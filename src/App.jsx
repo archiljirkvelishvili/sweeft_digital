@@ -1,47 +1,21 @@
+import { Routes, Route } from "react-router-dom";
 
-import React, {useState, useEffect} from "react"
+import Userfetch from "./components/Userfetch"
+import Friends from "./components/Friends"
 
-import User from "./components/User"
-import Spinner from "./components/Spinner"
 
 
 export default function App() {
   
-  const [dataList, setDataList] = useState([])
-  const [pageCount, setPageCount] = useState(1)
-  const [spinner, setSpinner] = useState(false)
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch(`http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user/${pageCount}/30`)
-        const data = await response.json()
-        console.log(data.list)
-        setDataList(prev => [...prev, ...data.list])
-        setSpinner(false)
-      } catch (error) {
-        throw error
-      }
-    })()
-  }, [pageCount])
-
-
-  window.onscroll = () =>{
-    if(window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight){
-      setPageCount(prev => prev + 1)
-      setSpinner(true)
-    }
-  }
-
-
-  const comp = dataList && dataList.map(item => <User key={item.id} data={item}/>)
-
+  
   return (
     <div>
-      <div className="card_wrapper">
-      {comp}
-      </div>
-      {spinner && <Spinner  />}
+      <Routes>
+
+        <Route path="/" element={<Userfetch />}/>
+        <Route path="/friends" element={<Friends />}/>
+
+      </Routes>
     </div>
   );
 }
