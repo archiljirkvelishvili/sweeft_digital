@@ -49,7 +49,7 @@ export default function Friends() {
   }
 
     const list = friendsData.map(item => <FriendList key={item.id} data={item} />)
-    const userinfo =  <UserInfo  data={user}/>
+    const userinfo =  <UserInfo  key={user.id} data={user} />
   
     return(
     <div>
